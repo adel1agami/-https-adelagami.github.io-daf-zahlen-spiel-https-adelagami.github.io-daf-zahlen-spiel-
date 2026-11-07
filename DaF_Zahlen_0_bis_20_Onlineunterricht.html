@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Die Zahlen von 0 bis 20 | DaF A1.1</title>
+<style>
+:root{--blue:#1769aa;--blue2:#eaf4ff;--yellow:#ffd45c;--orange:#f49a38;--ink:#183247;--muted:#607487;--green:#23865b;--red:#c34d4d;--line:#dce7ef;--white:#fff}
+*{box-sizing:border-box}body{margin:0;background:#f4f8fb;color:var(--ink);font-family:Arial,Helvetica,sans-serif}
+header{background:linear-gradient(120deg,#125b99,#2588c8);color:white;padding:22px 4vw 18px}
+header .top{max-width:1120px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}
+.kicker{font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;opacity:.9;font-weight:bold}
+h1{margin:7px 0 4px;font-size:clamp(1.8rem,4vw,2.8rem)}header p{margin:0;opacity:.92}
+.pill{background:#ffffff20;border:1px solid #ffffff55;padding:8px 13px;border-radius:30px;font-weight:bold}
+main{max-width:1120px;margin:22px auto;padding:0 18px 45px}
+.nav{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.nav button,.btn{border:0;border-radius:12px;padding:11px 15px;font-weight:bold;cursor:pointer;font-size:.95rem}
+.nav button{background:white;color:var(--blue);border:1px solid var(--line)}
+.nav button.active{background:var(--blue);color:white;border-color:var(--blue)}
+.panel{display:none;background:white;border:1px solid var(--line);border-radius:20px;padding:clamp(18px,3vw,30px);box-shadow:0 8px 28px #163b5710}
+.panel.active{display:block}
+h2{margin:0 0 8px;color:var(--blue);font-size:1.55rem}
+.intro{color:var(--muted);margin:0 0 20px;line-height:1.5}
+.number-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(125px,1fr));gap:12px}
+.num-card{border:2px solid var(--line);background:#fff;border-radius:16px;min-height:112px;padding:13px 8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer;transition:.15s}
+.num-card:hover,.num-card:focus{border-color:var(--blue);background:var(--blue2);transform:translateY(-2px)}
+.digit{font-size:2rem;font-weight:800;color:var(--blue);line-height:1}
+.word{font-size:1.05rem;font-weight:bold}
+.speaker{font-size:.8rem;color:var(--muted)}
+.controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;align-items:center}
+.btn{background:var(--blue);color:white}.btn.secondary{background:var(--blue2);color:var(--blue)}.btn.yellow{background:var(--yellow);color:#493600}.btn:disabled{opacity:.45;cursor:not-allowed}
+.note{font-size:.9rem;color:var(--muted);margin-top:12px}
+.audio-box{background:var(--blue2);border-radius:18px;padding:24px;text-align:center;margin:16px 0}
+.big-audio{font-size:clamp(2.5rem,8vw,4.5rem);font-weight:800;color:var(--blue);min-height:82px}
+.hidden-word{letter-spacing:.2em;color:#8aa0b2}
+.feedback{min-height:28px;font-weight:bold;margin-top:12px}
+.feedback.good{color:var(--green)}.feedback.bad{color:var(--red)}
+.match-wrap{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.match-col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.match-item{padding:13px 8px;border:2px solid var(--line);border-radius:12px;background:white;font-weight:bold;cursor:pointer;text-align:center}
+.match-item.selected{border-color:var(--orange);background:#fff6e7}
+.match-item.matched{border-color:#8bc9aa;background:#eaf8f0;color:#236a48;cursor:default}
+.quiz-options{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+.option{padding:20px 10px;border:2px solid var(--line);border-radius:15px;background:white;font-size:1.8rem;font-weight:800;color:var(--blue);cursor:pointer}
+.option:hover{background:var(--blue2);border-color:var(--blue)}
+.scoreline{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;background:#f5f9fc;padding:12px 15px;border-radius:12px;font-weight:bold}
+.transfer-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+.transfer{border:1px solid var(--line);border-radius:15px;padding:16px;background:#fbfdff}
+.transfer strong{display:block;color:var(--blue);font-size:1.1rem;margin-bottom:8px}
+.transfer input{width:100%;padding:11px;border:1px solid #b9cbd8;border-radius:9px;font-size:1rem;margin-top:8px}
+.teacher{background:#fff8e4;border-left:4px solid var(--yellow);padding:12px 15px;border-radius:8px;margin-top:18px;color:#604d1a}
+footer{text-align:center;color:var(--muted);font-size:.85rem;padding:16px}
+@media(max-width:620px){.match-wrap{grid-template-columns:1fr}.quiz-options{grid-template-columns:1fr 1fr 1fr}.option{font-size:1.4rem;padding:16px 5px}}
+</style>
+</head>
+<body>
+<header><div class="top"><div><div class="kicker">Deutsch als Fremdsprache · A1.1</div><h1>Die Zahlen von 0 bis 20</h1><p>Hören · Lesen · Zuordnen · Sprechen</p></div><div class="pill">Interaktive Online-Stunde</div></div></header>
+<main>
+<nav class="nav" aria-label="Unterrichtsphasen">
+<button class="active" data-tab="zahlen">1 · Entdecken</button>
+<button data-tab="hoeren">2 · Hören</button>
+<button data-tab="zuordnen">3 · Zuordnen</button>
+<button data-tab="quiz">4 · Hörquiz</button>
+<button data-tab="alltag">5 · Im Alltag</button>
+</nav>
+
+<section class="panel active" id="zahlen">
+<h2>1. Schau, lies und hör zu!</h2>
+<p class="intro">Klicke auf eine Karte. Du hörst das Zahlwort auf Deutsch. Sprich danach laut nach!</p>
+<div class="number-grid" id="numberGrid"></div>
+<div class="controls"><button class="btn secondary" id="repeatAll">Alle Zahlen hören</button><button class="btn yellow" id="stopSpeech">音 Stopp</button></div>
+<p class="note">Tipp: Höre zuerst zu und sprich dann nach. Du kannst jede Zahl beliebig oft anklicken.</p>
+</section>
+
+<section class="panel" id="hoeren">
+<h2>2. Hör genau hin!</h2>
+<p class="intro">Eine Zahl wird vorgelesen. Welche Zahl hast du gehört? Sag die Antwort laut. Danach kannst du die Lösung anzeigen.</p>
+<div class="audio-box">
+<div class="kicker" style="color:#54738b">Welche Zahl hörst du?</div>
+<div class="big-audio hidden-word" id="listenPrompt">? ? ?</div>
+<div class="feedback" id="listenFeedback" aria-live="polite"></div>
+<div class="controls" style="justify-content:center">
+<button class="btn" id="newListen">Zahl hören</button>
+<button class="btn secondary" id="replayListen" disabled>Noch einmal hören</button>
+<button class="btn yellow" id="showListen" disabled>Lösung anzeigen</button>
+</div>
+</div>
+<p class="note">Lehrkraft: Lernende nennen die Zahl mündlich oder schreiben sie in den Chat.</p>
+</section>
+
+<section class="panel" id="zuordnen">
+<h2>3. Verbinde Ziffer und Zahlwort!</h2>
+<p class="intro">Wähle links eine Ziffer und rechts das passende Zahlwort. Es gibt sechs Paare pro Runde.</p>
+<div class="scoreline"><span>Gefundene Paare: <span id="matchScore">0</span> / 6</span><span id="matchMessage">Los geht’s!</span></div>
+<div class="match-wrap" style="margin-top:16px"><div class="match-col" id="digitChoices"></div><div class="match-col" id="wordChoices"></div></div>
+<div class="controls"><button class="btn secondary" id="newMatch">Neue Runde</button></div>
+</section>
+
+<section class="panel" id="quiz">
+<h2>4. Hör zu und wähle!</h2>
+<p class="intro">Höre das Zahlwort und klicke auf die richtige Ziffer.</p>
+<div class="scoreline"><span>Frage: <span id="qNumber">0</span> / 10</span><span>Punkte: <span id="qScore">0</span></span></div>
+<div class="audio-box">
+<div class="kicker" style="color:#54738b">Welche Ziffer passt?</div>
+<div class="big-audio" id="quizIcon">🔊</div>
+<div class="controls" style="justify-content:center"><button class="btn" id="playQuiz">Zahl hören</button><button class="btn secondary" id="replayQuiz">Noch einmal</button></div>
+<div class="quiz-options" id="quizOptions"></div>
+<div class="feedback" id="quizFeedback" aria-live="polite"></div>
+<div class="controls" style="justify-content:center"><button class="btn yellow" id="nextQuiz" disabled>Weiter</button><button class="btn secondary" id="restartQuiz">Quiz neu starten</button></div>
+</div>
+<div class="note" id="quizResult"></div>
+</section>
+
+<section class="panel" id="alltag">
+<h2>5. Zahlen im Alltag</h2>
+<p class="intro">Sprich mit deinem Partner oder deiner Partnerin. Ergänze die Antworten und lies sie laut vor.</p>
+<div class="transfer-grid">
+<div class="transfer"><strong>1. Wie alt bist du?</strong>Ich bin … Jahre alt.<input placeholder="z. B. 14"></div>
+<div class="transfer"><strong>2. Wie ist deine Telefonnummer?</strong>Meine Telefonnummer ist …<input placeholder="Zahlen eingeben"></div>
+<div class="transfer"><strong>3. Welche Busnummer nimmst du?</strong>Ich nehme Bus Nummer …<input placeholder="z. B. 7"></div>
+<div class="transfer"><strong>4. Wie viel kostet das?</strong>Das kostet … Euro.<input placeholder="z. B. 12"></div>
+<div class="transfer"><strong>5. Wie ist deine Hausnummer?</strong>Ich wohne in der …<input placeholder="z. B. 18"></div>
+</div>
+<div class="teacher"><strong>Sprechaufgabe:</strong> Arbeitet zu zweit. Stellt euch gegenseitig drei Fragen. Achtet darauf, die Zahlen deutlich auszusprechen.</div>
+</section>
+<footer>DaF A1.1 · Die Zahlen von 0 bis 20</footer>
+</main>
+<script>
+const words=["null","eins","zwei","drei","vier","fünf","sechs","sieben","acht","neun","zehn","elf","zwölf","dreizehn","vierzehn","fünfzehn","sechzehn","siebzehn","achtzehn","neunzehn","zwanzig"];
+let voice=null;
+function loadVoice(){if(!('speechSynthesis'in window))return;const vs=speechSynthesis.getVoices();voice=vs.find(v=>v.lang.toLowerCase()==='de-de')||vs.find(v=>v.lang.toLowerCase().startsWith('de'))||null}
+if('speechSynthesis'in window){loadVoice();speechSynthesis.onvoiceschanged=loadVoice}
+function speak(word,rate=0.82){if(!('speechSynthesis'in window)){alert('Die Sprachausgabe wird von diesem Browser nicht unterstützt.');return}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(word);u.lang='de-DE';u.rate=rate;if(voice)u.voice=voice;speechSynthesis.speak(u)}
+function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
+document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.nav button').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('active',p.id===b.dataset.tab));speechSynthesis?.cancel?.()}));
+const grid=document.getElementById('numberGrid');
+words.forEach((w,i)=>{const b=document.createElement('button');b.className='num-card';b.innerHTML=`<span class="digit">${i}</span><span class="word">${w}</span><span class="speaker">🔊 Anhören</span>`;b.setAttribute('aria-label',`${i}, ${w}, anhören`);b.onclick=()=>speak(w);grid.appendChild(b)});
+document.getElementById('repeatAll').onclick=async()=>{for(const w of words){await new Promise(resolve=>{if(!('speechSynthesis'in window)){resolve();return}speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(w);u.lang='de-DE';u.rate=.78;if(voice)u.voice=voice;u.onend=resolve;u.onerror=resolve;speechSynthesis.speak(u)})}};
+document.getElementById('stopSpeech').onclick=()=>speechSynthesis?.cancel?.();
+
+// Listening activity
+let listenN=null;
+function setListen(){listenN=Math.floor(Math.random()*21);document.getElementById('listenPrompt').textContent='? ? ?';document.getElementById('listenPrompt').classList.add('hidden-word');document.getElementById('listenFeedback').textContent='';document.getElementById('listenFeedback').className='feedback';document.getElementById('replayListen').disabled=false;document.getElementById('showListen').disabled=false;speak(words[listenN])}
+document.getElementById('newListen').onclick=setListen;
+document.getElementById('replayListen').onclick=()=>{if(listenN!==null)speak(words[listenN])};
+document.getElementById('showListen').onclick=()=>{if(listenN!==null){document.getElementById('listenPrompt').textContent=listenN+' – '+words[listenN];document.getElementById('listenPrompt').classList.remove('hidden-word');document.getElementById('listenFeedback').textContent='Richtig gehört? Sprich die Zahl noch einmal!'}};
+
+// Matching activity
+let selectedDigit=null,selectedWord=null,matched=new Set();
+function newMatch(){const ns=shuffle([...Array(21).keys()]).slice(0,6);matched=new Set();selectedDigit=null;selectedWord=null;document.getElementById('matchScore').textContent='0';document.getElementById('matchMessage').textContent='Wähle ein passendes Paar.';const left=document.getElementById('digitChoices'),right=document.getElementById('wordChoices');left.innerHTML='';right.innerHTML='';shuffle(ns).forEach(n=>{const b=document.createElement('button');b.className='match-item';b.textContent=n;b.dataset.n=n;b.onclick=()=>pickMatch('d',n,b);left.appendChild(b)});shuffle(ns).forEach(n=>{const b=document.createElement('button');b.className='match-item';b.textContent=words[n];b.dataset.n=n;b.onclick=()=>pickMatch('w',n,b);right.appendChild(b)})}
+function pickMatch(type,n,el){if(matched.has(n))return;if(type==='d'){selectedDigit=n;document.querySelectorAll('#digitChoices .match-item').forEach(x=>x.classList.remove('selected'))}else{selectedWord=n;document.querySelectorAll('#wordChoices .match-item').forEach(x=>x.classList.remove('selected'))}el.classList.add('selected');if(selectedDigit!==null&&selectedWord!==null){if(selectedDigit===selectedWord){matched.add(n);document.querySelectorAll(`.match-item[data-n="${n}"]`).forEach(x=>{x.classList.remove('selected');x.classList.add('matched')});document.getElementById('matchScore').textContent=matched.size;document.getElementById('matchMessage').textContent=matched.size===6?'Ausgezeichnet! Alle Paare gefunden.':'Richtig!';speak(words[n])}else{document.getElementById('matchMessage').textContent='Noch nicht richtig. Versuch es erneut!'}selectedDigit=null;selectedWord=null}}
+document.getElementById('newMatch').onclick=newMatch;newMatch();
+
+// Quiz
+let quizQuestions=[],qi=0,score=0,answered=false;
+function startQuiz(){quizQuestions=shuffle([...Array(21).keys()]).slice(0,10);qi=0;score=0;document.getElementById('quizResult').textContent='';renderQuiz()}
+function renderQuiz(){answered=false;const n=quizQuestions[qi];document.getElementById('qNumber').textContent=qi+1;document.getElementById('qScore').textContent=score;document.getElementById('quizIcon').textContent='🔊';document.getElementById('quizFeedback').textContent='';document.getElementById('quizFeedback').className='feedback';document.getElementById('nextQuiz').disabled=true;const opts=new Set([n]);while(opts.size<3)opts.add(Math.floor(Math.random()*21));const arr=shuffle([...opts]);const box=document.getElementById('quizOptions');box.innerHTML='';arr.forEach(v=>{const b=document.createElement('button');b.className='option';b.textContent=v;b.onclick=()=>answerQuiz(v,n,b);box.appendChild(b)});speak(words[n])}
+function answerQuiz(v,n,btn){if(answered)return;answered=true;const fb=document.getElementById('quizFeedback');if(v===n){score++;fb.textContent='Richtig! Sehr gut!';fb.className='feedback good';speak('Richtig! '+words[n])}else{fb.textContent='Leider falsch. Die richtige Antwort ist '+n+'. '+words[n]+'.';fb.className='feedback bad';speak(words[n])}document.getElementById('qScore').textContent=score;document.querySelectorAll('.option').forEach(b=>{b.disabled=true;if(Number(b.textContent)===n)b.style.borderColor='#23865b'});document.getElementById('nextQuiz').disabled=false}
+document.getElementById('playQuiz').onclick=()=>speak(words[quizQuestions[qi]]);
+document.getElementById('replayQuiz').onclick=()=>speak(words[quizQuestions[qi]]);
+document.getElementById('nextQuiz').onclick=()=>{if(qi<9){qi++;renderQuiz()}else{document.getElementById('quizOptions').innerHTML='';document.getElementById('quizIcon').textContent='🏆';document.getElementById('quizFeedback').textContent=`Du hast ${score} von 10 Punkten erreicht!`;document.getElementById('quizFeedback').className='feedback good';document.getElementById('nextQuiz').disabled=true;document.getElementById('quizResult').textContent=score>=8?'Super! Du kannst die Zahlen schon sehr gut.':score>=5?'Gut gemacht! Übe die Zahlen noch einmal.':'Weiter üben – du schaffst das!';}}; 
+document.getElementById('restartQuiz').onclick=startQuiz;
+startQuiz();
+</script>
+</body>
+</html>
